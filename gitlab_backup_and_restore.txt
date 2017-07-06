@@ -4,21 +4,14 @@
 
 
 一、查看Gitlab数据备份目录
-
 cat /etc/gitlab/gitlab.rb | grep 'backup_path'
-```
 gitlab_rails['backup_path'] = "/var/opt/gitlab/backups"
-```
 
 二、备份Gitlab数据
-
-```
 gitlab-rake gitlab:backup:create
-```
 
 
 三、还原Gitlab数据
-```
 # 停止相关数据连接服务
 gitlab-ctl stop unicorn
 gitlab-ctl stop sidekiq
@@ -28,13 +21,11 @@ gitlab-rake gitlab:backup:restore BACKUP=1499311027_2017_07_05_9.3.4
 
 # 启动gitlab
 gitlab-ctl start
-```
+
 
 四、Gitlab自动备份
 将备份命令添加至计划任务,可以执行每天定期进行备份
-```
 0 2 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create
-```
 
 
 五、Gitlab数据迁移
